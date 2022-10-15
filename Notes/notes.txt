@@ -1,0 +1,61 @@
+Stack
+    Flask
+    Flask-CORS
+    SQLAlchemy
+    JSONify
+    Unittest
+
+
+1. Intro to APIs
+-----------------------------------------------------------------
+
+    Concepts:
+        API - Application Programming Interface
+        Client-Server Communication
+        Internet Protocol (IP)
+            Also:
+                Transmission Control Protocol
+                Hypertext Transmission Protocol
+                File Transfer Protocol
+        RESTful APIs
+            Representational State Transfer
+            Introduced by Roy Fielding in 2000
+            Principles:
+                Uniform Interface:
+                    Standardized way of accessing and processing data
+                Stateless:
+                    Client requests are self-contained - server doesn't need to 
+                    store data to respond to subsequent request
+                Client-Server:
+                    There must be both client and server in architecture
+                Cacheable & Layered System:
+                    Cachin and layering increases network efficiency
+
+    APIS:
+        https://developers.google.com/maps/documentation/
+        https://stripe.com/docs/api?utm_source=zapier.com&utm_medium=referral&utm_campaign=zapier&utm_source=zapier.com&utm_medium=referral&utm_campaign=zapier
+        https://developers.facebook.com/docs
+        https://www.instagram.com/developer/
+        https://developer.spotify.com/documentation/web-api/
+
+    -mkvenv venv && activate
+
+
+2. HTTP & Flask Basics
+-----------------------------------------------------------------
+
+
+3. Endpoints & Payloads
+-----------------------------------------------------------------
+
+
+4. API Testing
+-----------------------------------------------------------------
+
+
+5. API Documentation
+-----------------------------------------------------------------
+
+
+6. Project: Trivia API
+-----------------------------------------------------------------
