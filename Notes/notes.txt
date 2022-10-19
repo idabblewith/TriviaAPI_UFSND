@@ -259,6 +259,45 @@ Stack
 5. API Documentation
 -----------------------------------------------------------------
 
+    Good API Documentation
+        Introduction
+        Getting Started
+            Base URL
+            API Keys/Auth (if applicable)
+        Errors
+            Response Codes
+            Messages
+            Error types
+        Resource Endpoint Library
+            Organized by resource
+            Endpoint
+            sample request
+            arguments & data types
+            response object including status codes & data types
+
+    Project Documentation
+        Project Title
+            Description & motivation
+            Screenshots
+            Code style guides followed
+
+        Getting Started
+            Prerequisites & installation with snippets
+            Local dev setup
+            Test & how to run
+
+        API reference 
+            Above
+
+        Deployment (if applicable)
+
+        Authors
+
+        Acknowledgements
+
+    EXAMPLE:
+    https://github.com/udacity/cd0037-API-Development-and-Documentation-exercises/tree/master/6_Final_Review
+    
 
 6. Project: Trivia API
 -----------------------------------------------------------------
