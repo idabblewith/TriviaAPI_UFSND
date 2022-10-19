@@ -44,9 +44,180 @@ Stack
 2. HTTP & Flask Basics
 -----------------------------------------------------------------
 
+    HTTPS >
+        foundation of net since 1990
+        is connectionless, Stateless
+        is NOT sessionless
+        is media independent
+    
+    URIs (Uniform Resource Identifiers)
+
+    Status Codes/Messages
+        1xx Informational
+        2xx Success
+        3xx Redirection
+        4xx Client Error
+        5xx Server Error
+
+        COMMON:
+            200: OK
+            201: Created
+            202: Accepted
+            204: No Content
+            304: Not Modified
+            400: Bad Request
+            401: Unauthorized
+            404: Not Found
+            405: Method Not Allowed
+            500: Internal Server Error
+        
+    HTTP Request Elements:
+        Method: 
+            GET, POST, DELETE
+            PUT: Replaces all of the representation of the target resource with request data
+            PATCH: Partially modifies the representation of the target resource with the request data
+            OPTIONS: Sends the communication options for the requested resource
+        Path: http://www.example.com/tasks/1
+        HTTP Version: HTTP/2.0
+        Headers (optional): Accept-Language:en
+        Body (optional): JSON {"varname":"varval"}
+
+    CHROME & CURL:
+        CTRL + J & NETWORK TAB
+
+        GET: curl http://www.example.com/tasks/
+        POST: curl -X POST http://www.example.com/tasks/
+
+        COMMON:
+            -X or --request COMMAND
+            -d or --data DATA
+            -F or --form CONTENT
+            -u or --user USER[:PASSWORD]
+            -H or --header LINE
+
+        curl --version
+        https://pokeapi.co/api/v2/move/47
+
+    FLASK:
+        mircoframework
+
+    mkdir flaskr && touch __init__.py inside
+        >
+        from flask import Flask, jsonify
+        import os
+
+
+        def create_app(test_config=None):
+            app = Flask(__name__, instance_relative_config=True)
+            app.config.from_mapping(
+                SECRET_KEY="dev",
+                DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
+            )
+            if test_config is None:
+                # load the instance config, if it exists, when not testing
+                app.config.from_pyfile("config.py", silent=True)
+            else:
+                # load the test config if passed in
+                app.config.from_mapping(test_config)
+
+            # ensure the instance folder exists
+            try:
+                os.makedirs(app.instance_path)
+            except OSError:
+                pass
+
+            @app.route("/")
+            def hello():
+                return jsonify({"message": "hello"})
+
+            @app.route("/smiley")
+            def smiley():
+                return jsonify({"message": ":)"})
+
+            return app
+
+    alias daf='FLASK_APP=flaskr FLASK_DEBUG=true flask run --host=0.0.0.0'
+    ex FLASK_APP=flaskr
+    ex FLASK_ENV=development
+    flask run
+
+
 
 3. Endpoints & Payloads
 -----------------------------------------------------------------
+
+    Organization
+        Should be intuitive
+        Organize by resource
+            Use nouns in the path, not verbs
+            The method used will determine the operation taken
+            GOOD:
+            https://example.com/posts
+            BAD:
+            https://example.com/get_posts
+
+            Don’t make them too complex or lengthy
+            No longer than collection/item/collection
+            GOOD:
+            https://example.com/entrees/5/reviews
+            BAD:
+            https://example.com/entrees/5/customers/4
+
+    CORS
+        The same-origin policy is a concept of web security that allows scripts 
+        in Webpage 1 to access data from Webpage 2 only if they share the same domain.
+        Triggered by:
+            Different domains
+            Different subdomains (example.com and api.example.com)
+            Different ports (example.com and example.com:1234)
+            Different protocols (http://example.com and https://example.com)
+
+        CORS Headers
+            Access-Control-Allow-Origin
+                What client domains can access its resources. For any domain use *
+            Access-Control-Allow-Credentials
+                Only if using cookies for authentication - in which case its value must be true
+            Access-Control-Allow-Methods
+              List of HTTP request types allowed
+            Access-Control-Allow-Headers
+              List of http request header values the server will allow, particularly useful if you use any custom headers
+
+
+        Flask CORS
+            enabling cross origin:
+                @cross_origin
+            
+
+        pip install flask-cors
+
+
+    RouteDecorations * Pagination
+        var routes:
+            @app.route('/entrees/<int:entree_id>')
+
+        http meth:
+            @app.route('/hello', methods=['GET', 'POST'])
+
+        pagination:
+            query param:
+                www.example.com/entrees?page=1
+                www.example.com/entrees?page=1&allergens=peanut
+
+            request args:
+                @app.route('/entrees', methods=['GET'])
+                def get_entrees():
+                page = request.args.get('page', 1, type=int)
+
+
+    Errors
+
+        @app.errorhandler(404)
+        def not_found(error):
+            return jsonify({
+                "success": False, 
+                "error": 404,
+                "message": "Not found"
+            }), 404
 
 
 4. API Testing
